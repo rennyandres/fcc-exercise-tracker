@@ -43,3 +43,33 @@ h4 {margin-bottom: 0;}
   display: table;
   clear: both;
 }
+
+form {
+    background: #F5F5F5;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    display: block;
+    border-radius: 3px;
+    padding: 5px;
+    font-family: inherit;
+    font-size: inherit;
+    border: none;
+    margin: 10px 0;
+}
+
+input[type="text"] {
+    border: 1px solid #c1c1c1;
+}
+
+input[type="submit"] {
+    background: #016300;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
