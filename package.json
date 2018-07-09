@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "repository": "",
+  "repository": "https://github.com/rennyandres/fcc-exercise-tracker",
   "author": "Renny Andres",
   "dependencies": {
     "ejs": "^2.6.1",
