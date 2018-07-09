@@ -1,0 +1,17 @@
+{
+  "name": "fcc-exercise-tracker",
+  "version": "0.1.0",
+  "description": "FreeCodeCamp's Exercise tracker project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": "",
+  "author": "Renny Andres",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "~3.2.4",
+    "mongodb": "^3.1.0-beta4",
+    "mongoose": "^5.1.2"
+  }
+}
