@@ -38,5 +38,22 @@ module.exports = {
         User.create({ username: usernameForm }, function(err, doc) {
             callback(err, doc);
         });
+    },
+    storeExerciseEntrie: function(data, callback) {
+        Exercise.create({
+            description: data.description,
+            duration: Number(data.duration),
+            date: data.date            
+        }, function(err, exerciseDoc) {
+           callback(err, exerciseDoc);
+           
+           User.findById(data.userid, function(err, userDoc) {
+               if(err) throw err;
+               else {
+                   userDoc.exercises.push(exerciseDoc);
+                   userDoc.save();
+               }
+           });
+        });
     }
 }

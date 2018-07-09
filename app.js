@@ -24,6 +24,12 @@ app.post('/api/exercise/new-user', function(req, res) {
     });
 });
 
+app.post('/api/exercise/add', function(req, res) {
+    db.storeExerciseEntrie(req.body, function(err, doc) {
+        if(err) throw err;
+        else res.json(doc);
+    })
+});
 
 // HELPER FUNCTIONS -----------------------------------------------------------
 

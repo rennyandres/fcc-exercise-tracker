@@ -62,7 +62,7 @@ input {
     margin: 10px 0;
 }
 
-input[type="text"] {
+input[type="text"], input[type="text"] {
     border: 1px solid #c1c1c1;
 }
 
