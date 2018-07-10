@@ -16,14 +16,15 @@ mongoose.connection.once('open', function() {
 
 // SCHEMAS --------------------------------------------------------------------
 var exerciseSchema = new mongoose.Schema({
+    user: mongoose.Schema.Types.ObjectId,
     description: String,
     duration: Number,
-    date: String
+    date: Date
 });
 
 var userSchema = new mongoose.Schema({
     username: String,
-    exercises: [exerciseSchema]
+    exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }]
 });
 
 
@@ -39,21 +40,33 @@ module.exports = {
             callback(err, doc);
         });
     },
-    storeExerciseEntrie: function(data, callback) {
+    storeExercise: function(data, callback) {
         Exercise.create({
+            user: data.userid,
             description: data.description,
             duration: Number(data.duration),
-            date: data.date            
+            date: new Date(data.date)            
         }, function(err, exerciseDoc) {
            callback(err, exerciseDoc);
            
            User.findById(data.userid, function(err, userDoc) {
                if(err) throw err;
                else {
-                   userDoc.exercises.push(exerciseDoc);
+                   userDoc.exercises.push(exerciseDoc._id);
                    userDoc.save();
                }
            });
         });
+    },
+    retriveUserLog: function(data, callback) {
+        Exercise.find({ user: data.userId })
+        .select('-_id -user -__v')
+        .where('date')
+            .gt(new Date(data.from || '1970/01/01'))
+            .lt(new Date(data.to || Date.now()))
+        .limit(Number(data.limit))
+        .exec(function(err, result) {
+            callback(err, result);
+        });            
     }
 }

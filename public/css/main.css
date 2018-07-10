@@ -62,12 +62,12 @@ input {
     margin: 10px 0;
 }
 
-input[type="text"], input[type="text"] {
+input[type="text"], input[type="number"] {
     border: 1px solid #c1c1c1;
 }
 
 input[type="submit"] {
-    background: #016300;
+    background: black;
     color: white;
     border: none;
     padding: 10px;

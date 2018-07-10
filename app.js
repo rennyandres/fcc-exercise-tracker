@@ -25,13 +25,39 @@ app.post('/api/exercise/new-user', function(req, res) {
 });
 
 app.post('/api/exercise/add', function(req, res) {
-    db.storeExerciseEntrie(req.body, function(err, doc) {
+    db.storeExercise(req.body, function(err, doc) {
         if(err) throw err;
         else res.json(doc);
     })
 });
 
+app.get('/api/exercise/log',dateValidator, function(req, res) {
+    if(!req.query.userId) res.send('userId is required');
+    else {
+        db.retriveUserLog(req.query, function(err, data) {
+            if(err) throw err;
+            else res.send(data);
+        })
+    }
+})
+
 // HELPER FUNCTIONS -----------------------------------------------------------
+function dateValidator(req, res, next) {
+    if(req.query.from || req.query.to) {
+        if(new Date(req.query.from).toString() === 'Invalid Date'
+            || new Date(req.query.to).toString() === 'Invalid Date') {
+            res.json({
+                'date [from & to]': 'Invalid date format. Follow yyyy/mm/dd'
+            });
+        }
+        else {
+            next();
+        }          
+    }
+    else {
+        next();
+    }
+}
 
 
 
